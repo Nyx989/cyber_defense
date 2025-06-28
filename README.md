@@ -72,11 +72,9 @@ pip install -r requirements.txt
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/Enhanced-Cyber-Defense-System.git
+    git clone https://github.com/Nyx989/Enhanced-Cyber-Defense-System.git
     cd Enhanced-Cyber-Defense-System
     ```
-
-    (Remember to replace `yourusername` with your actual GitHub username if you're hosting this project publicly.)
 
 2.  **Set up the directory structure:**
     The system expects specific folders for logs and captured data. Ensure these directories exist:
