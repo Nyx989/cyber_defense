@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied</title>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+        /* Darknet Font */
+        @font-face {
+            font-family: 'Darknet';
+            src: url('C:\Users\user\Documents\cyber_defense\static\fonts\Darknet.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* General Styles */
+        :root {
+            --background-color: #0d1117;
+            --text-color: white;
+            --navbar-bg: rgba(0, 0, 0, 0.8);
+            --card-bg: rgba(0, 0, 0, 0.8);
+            --card-shadow: 0 0 20px rgba(255, 85, 85, 0.5);
+            --btn-bg: #ff5555;
+            --btn-hover-bg: #ff2222;
+            --highlight-color: #ff5555;
+            --gradient-primary: linear-gradient(135deg, #ff5555, #ff2222);
+        }
+
+        body.light-mode {
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            --btn-bg: #007BFF;
+            --btn-hover-bg: #0056b3;
+            --highlight-color: #007BFF;
+            --gradient-primary: linear-gradient(135deg, #007BFF, #0056b3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+            transition: background 0.5s, color 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Place the video behind the content */
+        }
+
+        /* Overlay to darken the video */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+            z-index: 0; /* Place the overlay above the video but below the content */
+        }
+
+        /* Content Container */
+        .content {
+            position: relative;
+            z-index: 1; /* Place the content above the overlay and video */
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Glitch Effect for Heading */
+        h1 {
+            font-family: 'Darknet', sans-serif;
+            font-size: 4rem;
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        h1::before,
+        h1::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        h1::before {
+            color: #00f;
+            animation: glitch-before 2s infinite;
+            z-index: -1;
+        }
+
+        h1::after {
+            color: #f00;
+            animation: glitch-after 1.5s infinite;
+            z-index: -2;
+        }
+
+        @keyframes glitch {
+            0% { clip-path: inset(0 0 0 0); text-shadow: 0 0 10px red, 0 0 20px red; }
+            20% { clip-path: inset(20% 0 10% 0); text-shadow: 5px 0 10px blue, -5px 0 10px red; }
+            40% { clip-path: inset(10% 0 30% 0); text-shadow: -5px 0 10px blue, 5px 0 10px red; }
+            60% { clip-path: inset(40% 0 10% 0); text-shadow: 5px 0 10px blue, -5px 0 10px red; }
+            80% { clip-path: inset(10% 0 20% 0); text-shadow: -5px 0 10px blue, 5px 0 10px red; }
+            100% { clip-path: inset(0 0 0 0); text-shadow: 0 0 10px red, 0 0 20px red; }
+        }
+
+        @keyframes glitch-before {
+            0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 10% 0); transform: translate(-5px, 5px); }
+            40% { clip-path: inset(10% 0 30% 0); transform: translate(5px, -5px); }
+            60% { clip-path: inset(40% 0 10% 0); transform: translate(-5px, 5px); }
+            80% { clip-path: inset(10% 0 20% 0); transform: translate(5px, -5px); }
+            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        }
+
+        @keyframes glitch-after {
+            0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            25% { clip-path: inset(10% 0 20% 0); transform: translate(5px, -5px); }
+            50% { clip-path: inset(30% 0 10% 0); transform: translate(-5px, 5px); }
+            75% { clip-path: inset(20% 0 10% 0); transform: translate(5px, -5px); }
+            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--btn-bg);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: var(--card-shadow);
+        }
+
+        a:hover {
+            background: var(--btn-hover-bg);
+            transform: scale(1.05);
+        }
+
+        /* Dark Mode Toggle Button */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+            z-index: 2; /* Ensure the button is above the video and overlay */
+        }
+
+        .mode-toggle:hover {
+            background: var(--btn-hover-bg);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay loop muted playsinline class="video-background">
+        <source src="static/acess.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Overlay to darken the video -->
+    <div class="overlay"></div>
+
+    <!-- Content -->
+    <div class="content">
+        <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+        <h1 data-text="Access Denied">Access Denied</h1>
+        <p>Your answers did not match. You cannot access the application.</p>
+        <a href="{{ url_for('verification') }}">Try Again</a>
+    </div>
+
+    <script>
+        // Dark Mode Toggle Function
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+        }
+    </script>
+</body>
+</html>

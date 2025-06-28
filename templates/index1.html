@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoctisX - Cybersecurity Solutions</title>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode Variables */
+        :root {
+            --background-color: #152030; /* Dark blue-gray background */
+    --text-color: white; /* White text for contrast */
+    --navbar-bg: rgba(13, 17, 23, 0.8); /* Semi-transparent navbar background */
+    --card-bg: rgba(13, 17, 23, 0.8); /* Semi-transparent card background */
+    --card-shadow: 0 0 20px rgba(255, 85, 85, 0.5); /* Red shadow for cards */
+    --btn-bg: #ff5555; /* Red button background */
+    --btn-hover-bg: #ff2222; /* Darker red for button hover */
+    --highlight-color: #ff5555; /* Red highlight color */
+    --gradient-primary: linear-gradient(135deg, #ff555533, #ff555533); /* Red gradient */}
+
+        /* Light Mode Variables */
+        body.light-mode {
+            --background-color: #f9f9f9; /* Light gray background for light mode */
+    --text-color: #333; /* Dark gray text for light mode */
+    --navbar-bg: rgba(255, 255, 255, 0.8); /* Semi-transparent white navbar */
+    --card-bg: rgba(255, 255, 255, 0.8); /* Semi-transparent white card background */
+    --card-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for light mode */
+    --btn-bg: #007BFF; /* Blue button background for light mode */
+    --btn-hover-bg: #0056b3; /* Darker blue for button hover */
+    --highlight-color: #007BFF; /* Blue highlight color */
+    --gradient-primary: linear-gradient(135deg, #007BFF, #0056b3); /* Blue gradient */}
+/* Add these styles */
+.features,
+.why-noctisx,
+.button-part,
+.user-guide,
+.footer {
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.features:not(.visible),
+.why-noctisx:not(.visible),
+.button-part:not(.visible),
+.user-guide:not(.visible),
+.footer:not(.visible) {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+}
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--highlight-color);
+            text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .navbar a:hover {
+            color: var(--highlight-color);
+            transform: translateY(-3px);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .dark-mode-toggle span {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .dark-mode-toggle .toggle-switch {
+            width: 40px;
+            height: 20px;
+            background: #ccc;
+            border-radius: 20px;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .dark-mode-toggle .toggle-switch::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        body.light-mode .dark-mode-toggle .toggle-switch {
+            background: var(--highlight-color);
+        }
+
+        body.light-mode .dark-mode-toggle .toggle-switch::before {
+            transform: translateX(20px);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .hero-content .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-content .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--highlight-color);
+        }
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--card-bg);
+}
+@keyframes borderTravel {
+    0% {
+        border-image-source: linear-gradient(90deg, #690d0b, #4a7bf7, #690d0b);
+        border-image-slice: 1;
+    }
+    50% {
+        border-image-source: linear-gradient(90deg, #4a7bf7, #690d0b, #4a7bf7);
+        border-image-slice: 1;
+    }
+    100% {
+        border-image-source: linear-gradient(90deg, #690d0b, #4a7bf7, #690d0b);
+        border-image-slice: 1;
+    }
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+    animation: fadeInDown 1.5s ease-in-out;
+}
+
+.features p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 40px;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.feature-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 20px 0;
+}
+
+.feature-card {
+    width: 250px;
+    height: 360px; /* Ensuring proper space for text */
+    perspective: 1000px;
+    position: relative; /* Increased height to accommodate text */
+    margin: 1rem;
+    
+}
+
+.feature-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.feature-card.flipped .feature-card-inner {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 20px var(--highlight-color), 0 0 40px var(--highlight-color);
+}
+/* Front Side with Thinner Animated Border */
+.feature-card-front {
+    background: var(--card-bg);
+    color: #000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    animation: borderTravel 2.5s linear infinite; /* Makes border thin */
+}
+/* Move the Glow */
+@keyframes borderMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* Neon Glow Border */
+.feature-card-front::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #690d0b, #0b1769, #690d0b);
+    background-size: 300% 300%;
+    animation: neonGlow 1.5s infinite alternate, borderMove 3s linear infinite;
+}
+.feature-card-front,
+.feature-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.feature-card-front {
+    background: var(--card-bg);
+    color: #000;
+}
+.feature-card-front i {
+    font-size: 2rem;  /* Make icon bigger */
+    margin-bottom: 10px; 
+    color: var(--highlight-color);/* Add spacing below icon */
+}
+.feature-card-back {
+    transform: rotateY(180deg);
+    background: var(--card-bg);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.feature-icon {
+    font-size: 3rem; /* Slightly reduced icon size */
+    color: var(--highlight-color);
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem; /* Slightly reduced font size */
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.feature-card p {
+    font-size: 1.3rem; /* Increase font size */
+    line-height: 1.6;
+    max-width: 100%;
+    max-height: 80%;
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    text-align: center;
+}
+
+/* Add margin to flipped cards */
+.feature-card.flipped {
+    margin: 2rem 1rem; /* Increase margin when flipped */
+}
+
+        /* Why NoctisX Section */
+        .why-noctisx {
+            padding: 60px 20px;
+            background: var(--card-bg);
+            text-align: center;
+        }
+
+        .why-noctisx h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .why-noctisx p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        /* Button Part Below NoctisX Section */
+        .button-part {
+            padding: 60px 20px;
+            background: var(--card-bg);
+            text-align: center;
+        }
+
+        .button-part h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .button-part .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button-part .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--gradient-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .button-part .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--highlight-color);
+        }
+
+        /* User Guide Section */
+        .user-guide {
+            padding: 60px 20px;
+            background: var(--card-bg);
+            text-align: center;
+        }
+
+        .user-guide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        .user-guide p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 40px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--highlight-color), transparent);
+            opacity: 0.2;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-card:hover::before {
+            opacity: 0.4;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--highlight-color);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .step-card p {
+            font-size: 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+/* Footer Styles */
+/* Footer Styles */
+.container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.footer {
+    background-color: #0d1117; /* Dark background color */
+    color: white; /* White text color */
+    padding: 40px 0 0; /* Padding for the footer */
+}
+
+.footer-top {
+    padding-bottom: 40px; /* Padding at the bottom of the top section */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Light border at the bottom */
+}
+
+.container {
+    max-width: 1200px; /* Maximum width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Padding on the sides */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Space between sections */
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    width: 30%; /* Each section takes up 30% of the width */
+    padding: 20px; /* Padding inside each section */
+    box-sizing: border-box; /* Include padding in the width */
+    text-align: left; /* Align text to the left */
+}
+
+.footer-brand .logo {
+    font-size: 2rem; /* Larger font size for the logo */
+    color: #ff5555; /* Red color for the logo */
+    text-decoration: none; /* Remove underline */
+    margin-bottom: 20px; /* Margin below the logo */
+    display: block; /* Make it a block element */
+}
+
+.footer-text {
+    margin: 8px 0; /* Margin for text elements */
+    color: #fff8f8; /* Light white color for text */
+}
+
+.footer-list-title {
+    color: #ff5555; /* Red color for the list title */
+    font-size: 1.2rem; /* Font size for the list title */
+    margin-bottom: 20px; /* Margin below the title */
+}
+
+.footer-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.footer-link {
+    color: #fffcfc; /* Light white color for links */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make links block elements */
+    margin: 8px 0; /* Margin for links */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.footer-link:hover {
+    color: #ff5555; /* Red color on hover */
+}
+
+.social-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Display social icons in a row */
+    gap: 10px; /* Space between icons */
+}
+
+.social-link {
+    color: white; /* White color for icons */
+    width: 40px; /* Width of the icon container */
+    height: 40px; /* Height of the icon container */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove underline */
+    transition: transform 0.3s; /* Smooth transform transition */
+}
+
+.social-link:hover {
+    transform: translateY(-3px); /* Move icon up on hover */
+}
+
+.footer-bottom {
+    padding: 20px 0; /* Padding for the bottom section */
+    text-align: center; /* Center-align text */
+}
+
+.copyright {
+    color: #ffffff; /* White color for copyright text */
+    margin: 0; /* Remove default margin */
+}
+
+.copyright-link {
+    color: #ff5555; /* Red color for the link */
+    text-decoration: none; /* Remove underline */
+}
+
+        /* Animations */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">NoctisX</div>
+        <div class="links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#why-noctisx">Why NoctisX?</a>
+            <a href="#button-part">Buttons</a>
+            <a href="#user-guide">User Guide</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="dark-mode-toggle" id="dark-mode-toggle">
+            <span>Dark Mode</span>
+            <div class="toggle-switch"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="C:\Users\user\Documents\cyber_defense\static\Inhero.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>NoctisX</h1>
+            <p>Cybersecurity Foresight: Preventing tomorrow's threats, today</p>
+            <a href="#features" class="btn">Explore Features</a>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <!-- Features Section -->
+<div class="features" id="features">
+    <h2>Our Features</h2>
+    <p>Comprehensive security solutions for modern digital challenges</p>
+    <div class="feature-grid">
+        <div class="feature-card" onclick="flipCard(this)">
+            <div class="feature-card-inner">
+                <div class="feature-card-front">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3>Real-Time Monitoring</h3>
+                </div>
+                <div class="feature-card-back">
+                    <p>24/7 surveillance of your network with instant threat detection.</p>
+                </div>
+            </div>
+        </div>
+        <div class="feature-card" onclick="flipCard(this)">
+            <div class="feature-card-inner">
+                <div class="feature-card-front">
+                    <i class="fas fa-user-friends feature-icon"></i>
+                    <h3>User-Friendly</h3>
+                </div>
+                <div class="feature-card-back">
+                    <p>Intuitive interface designed for ease of use across all devices.</p>
+                </div>
+            </div>
+        </div>
+        <div class="feature-card" onclick="flipCard(this)">
+            <div class="feature-card-inner">
+                <div class="feature-card-front">
+                    <i class="fas fa-globe feature-icon"></i>
+                    <h3>Universal Browsing</h3>
+                </div>
+                <div class="feature-card-back">
+                    <p>Secure browsing across all platforms and devices.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Why NoctisX Section -->
+    <div class="why-noctisx" id="why-noctisx">
+        <h2>Why NoctisX?</h2>
+        <p>This project introduces an "Adaptive Cyber Defense System," a cutting-edge security solution designed to outperform existing systems by combining behavioral analysis. It goes beyond simple antivirus software by deeply monitoring user behavior, tracking keystrokes and clipboard activity to identify anomalies and potential insider threats in real-time. Unlike other solutions that may generate numerous false alarms or invade user privacy, this system refines anomaly detection to minimize false positives and employs robust data protection measures. Furthermore, it actively safeguards file integrity using SHA-256 hashing and monitors network traffic, including VPN usage, to prevent unauthorized access. All these powerful features are accessible through a user-friendly web interface, providing clear logs, alerts, and easy management. This system is designed to be highly adaptable and scalable, ready to meet evolving security challenges and offering a comprehensive, proactive approach to protecting your valuable data.</p>
+    </div>
+
+    <!-- Button Part Below NoctisX Section -->
+    <div class="button-part" id="button-part">
+        <h2>Get Started with NoctisX</h2>
+        <div class="btn-container">
+            <a href="#user-guide" class="btn">Learn More</a>
+            <a href="#footer" class="btn">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- User Guide Section -->
+    <div class="user-guide" id="user-guide">
+        <h2>User Guide</h2>
+        <p>Follow these simple steps to integrate NoctisX into your security routine.</p>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Sign Up</h3>
+                <p>Create your account and set up your profile.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Install</h3>
+                <p>Download and install the NoctisX application on your devices.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Configure</h3>
+                <p>Customize your security settings according to your needs.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Monitor</h3>
+                <p>Keep an eye on your security dashboard for real-time updates.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+   <footer class="footer" id="contact">
+    <div class="footer-top">
+        <div class="container">
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <div class="logo-container">
+                        <a href="#" class="logo">NoctisX</a>
+                    </div>
+                    <p class="footer-text">info@noctisx.com</p>
+                    <p class="footer-text">123 Main St, Anytown, USA</p>
+                    <p class="footer-text">+1234567890</p>
+                </div>
+            </div>
+            <div class="footer-center">
+                <div class="need-help">
+                    <p class="footer-list-title">Need Help?</p>
+                    <ul class="footer-list">
+                        <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                        <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link">Refund Policy</a></li>
+                        <li><a href="#" class="footer-link">Affiliate</a></li>
+                        <li><a href="#" class="footer-link">Use Cases</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-right">
+                <div class="follow-us">
+                    <p class="footer-list-title">Follow Us</p>
+                    <div class="footer-wrapper">
+                        <div class="social-wrapper">
+                            <ul class="social-list">
+                                <li>
+                                    <a href="#" class="social-link" style="background-color: #3b5998">
+                                        <ion-icon name="logo-facebook"></ion-icon>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="social-link" style="background-color: #55acee">
+                                        <ion-icon name="logo-twitter"></ion-icon>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="social-link" style="background-color: #d71e18">
+                                        <ion-icon name="logo-pinterest"></ion-icon>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="social-link" style="background-color: #1565c0">
+                                        <ion-icon name="logo-linkedin"></ion-icon>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="copyright">
+                &copy; 2024 NoctisX. All Right Reserved by <a href="#" class="copyright-link">NYX989</a>
+            </p>
+        </div>
+    </div>
+</footer>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        // Check localStorage for dark mode preference
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            body.classList.add('light-mode');
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const isLightMode = body.classList.contains('light-mode');
+            localStorage.setItem('darkMode', isLightMode);
+        });
+
+        // Enhanced Scroll Handler
+let isManualScroll = false;
+
+document.querySelectorAll('.navbar a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                isManualScroll = true;
+                
+                // Hide all sections except target
+                document.querySelectorAll('.features, .why-noctisx, .button-part, .user-guide, .footer').forEach(section => {
+                    if (section !== targetElement) {
+                        section.classList.remove('visible');
+                    }
+                });
+
+                // Scroll to target
+                const offset = 80;
+                const targetPosition = targetElement.offsetTop - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Trigger target animation after a slight delay
+                setTimeout(() => {
+                    targetElement.classList.add('visible');
+                    isManualScroll = false;
+                }, 500); // Adjust the delay here (500ms in this case)
+            }
+        }
+    });
+});
+
+// Intersection Observer for manual scrolling
+const observer = new IntersectionObserver((entries) => {
+    if (isManualScroll) return;
+    
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add a slight delay before making the section visible
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, 300); // Adjust the delay here (300ms in this case)
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.features, .why-noctisx, .button-part, .user-guide, .footer').forEach(section => {
+    observer.observe(section);
+});
+        // Flip Card Functionality with Glow Effect and Return to Original State
+function flipCard(card) {
+    // Toggle the flipped state
+    card.classList.toggle('flipped');
+
+    // Remove glow from all other cards
+    document.querySelectorAll('.feature-card').forEach(c => {
+        if (c !== card) {
+            c.classList.remove('flipped');
+        }
+    });
+}
+    </script>
+</body>
+</html>

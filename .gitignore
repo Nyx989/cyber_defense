@@ -1,0 +1,42 @@
+/audio
+/logs
+/out
+/quarantine
+/screenshots
+/uploads
+# .gitignore
+cyber_defense_env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+*.db
+*.sqlite3
+.DS_Store
+*.log
+*.bak
+*.swp
+# Environment and secret files
+.env
+*.env
+config.json
+*.sqlite3
+__pycache__/
+*.pyc
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+
+# Log and temporary files
+*.log
+*.bak
+*.tmp
+

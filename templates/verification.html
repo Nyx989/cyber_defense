@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Required</title>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+        /* General Styles */
+        :root {
+            --background-color: #0d1117;
+            --text-color: white;
+            --navbar-bg: rgba(0, 0, 0, 0.8);
+            --card-bg: rgba(0, 0, 0, 0.8);
+            --card-shadow: 0 0 20px rgba(255, 85, 85, 0.5);
+            --btn-bg: #ff5555;
+            --btn-hover-bg: #ff2222;
+            --highlight-color: #ff5555;
+            --gradient-primary: linear-gradient(135deg, #ff5555, #ff2222);
+        }
+
+        body.light-mode {
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            --btn-bg: #007BFF;
+            --btn-hover-bg: #0056b3;
+            --highlight-color: #007BFF;
+            --gradient-primary: linear-gradient(135deg, #007BFF, #0056b3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Pulsing Neon Effect for Text Shadows */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color); }
+            50% { text-shadow: 0 0 20px var(--highlight-color), 0 0 40px var(--highlight-color); }
+            100% { text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color); }
+        }
+
+        h1 {
+            font-family: 'Darknet', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            animation: pulse 2s infinite;
+            margin-top: 50px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 1px solid var(--highlight-color);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--btn-hover-bg);
+            box-shadow: 0 0 15px rgba(255, 85, 85, 0.7);
+        }
+
+        input[type="submit"], button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        input[type="submit"]:hover, button[type="submit"]:hover {
+            background: var(--btn-hover-bg);
+            transform: scale(1.05);
+        }
+
+        #timer {
+            font-weight: bold;
+            color: var(--highlight-color);
+            animation: pulse 1s infinite;
+        }
+
+        /* Dark Mode Toggle Button */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .mode-toggle:hover {
+            background: var(--btn-hover-bg);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+    <h1>Verification Required</h1>
+    <p>You have <span id="timer">30</span> seconds to answer the questions.</p>
+    <form id="verificationForm" method="POST" action="{{ url_for('verification') }}">
+        <label for="question1">What was the 3rd character of your first API token/PGP key (case-sensitive) combined with the last digit of your security certificate expiration year?</label>
+        <input type="text" id="question1" name="question1" required><br>
+
+        <label for="question2">Enter the 2nd and 4th characters of your hardware security module's serial number (positions 5-8) in reverse order.</label>
+        <input type="text" id="question2" name="question2" required><br>
+
+        <label for="question3">What are characters 3-6 of your emergency encryption key?</label>
+        <input type="text" id="question3" name="question3" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Timer countdown (30 seconds)
+        let timeLeft = 20;
+        const timerElement = document.getElementById('timer');
+        
+        function startTimer() {
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerElement.innerText = "0";
+                    // Auto-submit the form when time runs out
+                    document.getElementById("verificationForm").submit();
+                } else {
+                    timerElement.innerText = timeLeft;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+
+        // Auto-submit form after 30 seconds (backup in case timer fails)
+        setTimeout(function() {
+            document.getElementById("verificationForm").submit();
+        }, 30000);  // 30,000ms = 30 seconds
+
+        // Start the visible timer when page loads
+        window.onload = startTimer;
+
+        // Dark Mode Toggle Function
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+        }
+    </script>
+</body>
+</html>

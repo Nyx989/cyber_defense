@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login and Register</title>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Loginpage.css') }}">
+</head>
+<body>
+<header>
+    <h2 class="logo">NoctisX</h2>
+    <nav class="navigation">
+        <button class="btnLogin-popup">Login</button>
+    </nav>
+</header>
+<div class="welcome-message">
+    <h1>WELCOME TO NOCTISX</h1>
+    <p>Please Enter Your Valid Credentials.</p>
+</div>
+<!-- Video Background -->
+<div class="video-background">
+    <video autoplay muted loop>
+        <source src="{{ url_for('static', filename='login.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+<div class="wrapper">
+    <span class="icon-close">
+        <ion-icon name="close"></ion-icon>
+    </span>
+    <div class="form-box login">
+        <h2>Login</h2>
+        <form action="/login" method="POST">
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="mail"></ion-icon>
+                </span>
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox" required>
+                    Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <!-- Updated CAPTCHA Section -->
+            <div class="captcha-container">
+                <img src="/captcha" alt="CAPTCHA" class="captcha-image" onclick="this.src='/captcha?' + Math.random();">
+                <div class="captcha-input">
+                    <span class="icon">
+                        <ion-icon name="key-outline"></ion-icon> <!-- Key icon -->
+                    </span>
+                    <input type="text" name="captcha" required>
+                    <label>CAPTCHA</label>
+                </div>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="login-register">
+                <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+    <div class="form-box register">
+        <h2>Register</h2>
+        <form action="/register" method="POST" id="registerForm">
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" name="username" required>
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="mail"></ion-icon>
+                </span>
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" name="password" id="password" required oninput="checkPasswordStrength()">
+                <label>Password</label>
+            </div>
+            <div class="password-strength">
+                <span id="password-strength-text"></span>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" name="confirm_password" id="confirm_password" required>
+                <label>Confirm Password</label>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox" required>
+                    I agree to the terms and conditions</label>
+            </div>
+            <button type="submit" class="btn">Register</button>
+            <div class="login-register">
+                <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Custom Notification -->
+<div id="custom-notification" class="notification">
+    <span id="notification-message"></span>
+    <button id="close-notification" class="close-btn">&times;</button>
+</div>
+
+<script src="{{ url_for('static', filename='Loginpage.js') }}"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

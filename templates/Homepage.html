@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoctisX- Your invisible guardian</title>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Bentham&family=Cinzel:wght@400..900&family=IM+Fell+Great+Primer+SC&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        @font-face {
+            font-family: 'Darknet';
+            src: url('static/fonts/Darknet.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            color: white;
+            background: #0d1117;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Pulsing Neon Effect for Text Shadows */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555; }
+            50% { text-shadow: 0 0 20px #ff5555, 0 0 40px #ff5555; }
+            100% { text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555; }
+        }
+
+        /* Apply Pulsing Effect to Neon Text */
+        .content-section .text h2,
+        .who-are-we .text h2,
+        .noctisx-section h2,
+        .case-studies h2,
+        .invisible-guardian h2 {
+            animation: pulse 2s infinite !important;
+        }
+
+        /* Apply to specific elements */
+        .hero-content h1,
+        .invisible-guardian h2,
+        .noctisx-section h2,
+        .content-section .text h2,
+        .case-studies h2,
+        .who-are-we .text h2 {
+            font-family: 'Darknet', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar .logo {
+            margin-right: auto;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff5555;
+            text-shadow: 0 0 10px #ff5555;
+        }
+        .navbar .links {
+    display: flex;
+    justify-content: center; /* Center the links */
+    flex-grow: 1; /* Allow the links to take up available space */
+    margin: 0 20px; /* Add some margin to separate from logo and button */
+}
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ff5555;
+            transform: translateY(-3px);
+        }
+/* Login Button */
+.navbar .btn {
+    margin-right: 50px; /* Reduced margin to move the button left */
+    margin-left: auto; /* Push the button to the far right */
+}
+
+/* Thin Scrollbar */
+body::-webkit-scrollbar {
+    width: 8px; /* Adjust scrollbar width */
+}
+
+body::-webkit-scrollbar-track {
+    background: #0d1117; /* Track color */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #ff5555; /* Thumb color */
+    border-radius: 4px; /* Rounded corners */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #ff2222; /* Thumb color on hover */
+}
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+            padding: 12px 24px;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            color: white;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 0 10px rgba(255, 85, 85, 0.7);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #ff555533, rgba(255, 255, 255, 0));
+            filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover::before {
+            width: 120px;
+            height: 120px;
+            opacity: 0;
+        }
+
+        .btn {
+            margin-right: 50px; /* Adjust the value as needed */
+        }
+
+        .btn {
+            background: linear-gradient(to top right, rgba(255, 85, 85, 0.3), rgba(255, 85, 85, 0.7));
+            box-shadow: 0 0 20px rgba(255, 85, 85, 0.7);
+        }
+
+        .btn:hover {
+            background: linear-gradient(to top right, rgba(255, 85, 85, 0.6), rgba(255, 85, 85, 0.2));
+        }
+
+        /* Hero Section */
+        /* Enhanced Glitch Effect */
+        @keyframes glitch {
+            0% {
+                clip-path: inset(0 0 0 0);
+                text-shadow: 0 0 10px red, 0 0 20px red;
+            }
+            20% {
+                clip-path: inset(20% 0 10% 0);
+                text-shadow: 5px 0 10px blue, -5px 0 10px red;
+            }
+            40% {
+                clip-path: inset(10% 0 30% 0);
+                text-shadow: -5px 0 10px blue, 5px 0 10px red;
+            }
+            60% {
+                clip-path: inset(40% 0 10% 0);
+                text-shadow: 5px 0 10px blue, -5px 0 10px red;
+            }
+            80% {
+                clip-path: inset(10% 0 20% 0);
+                text-shadow: -5px 0 10px blue, 5px 0 10px red;
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+                text-shadow: 0 0 10px red, 0 0 20px red;
+            }
+        }
+
+        .hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-family: 'Darknet', sans-serif; /* Custom font */
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px red, 0 0 20px red;
+            animation: glitch 1s infinite;
+            position: relative;
+        }
+
+        /* Add a pseudo-element for a more complex glitch effect */
+        .hero-content h1::before,
+        .hero-content h1::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .hero-content h1::before {
+            color: blue;
+            animation: glitch-before 2s infinite;
+            z-index: -1;
+        }
+
+        .hero-content h1::after {
+            color: red;
+            animation: glitch-after 1.5s infinite;
+            z-index: -2;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Glitch animations for pseudo-elements */
+        @keyframes glitch-before {
+            0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 10% 0); transform: translate(-5px, 5px); }
+            40% { clip-path: inset(10% 0 30% 0); transform: translate(5px, -5px); }
+            60% { clip-path: inset(40% 0 10% 0); transform: translate(-5px, 5px); }
+            80% { clip-path: inset(10% 0 20% 0); transform: translate(5px, -5px); }
+            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        }
+
+        @keyframes glitch-after {
+            0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            25% { clip-path: inset(10% 0 20% 0); transform: translate(5px, -5px); }
+            50% { clip-path: inset(30% 0 10% 0); transform: translate(-5px, 5px); }
+            75% { clip-path: inset(20% 0 10% 0); transform: translate(5px, -5px); }
+            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Content Section */
+        .content-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px;
+            background: #0d1117;
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-section .text {
+            max-width: 50%;
+        }
+
+        .content-section .text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+            animation: glow 2s infinite alternate;
+        }
+
+        .content-section .text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .content-section .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .content-section .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff5555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .content-section .cta-button:hover {
+            background: #ff2222;
+            transform: scale(1.1);
+        }
+
+        .content-section .video {
+            width: 100%; /* Adjust the width to fit the content section */
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-section iframe {
+            width: 80%; /* Adjust the width to make the video more rectangular */
+            height: 450px; /* Adjust the height for a rectangular shape */
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 85, 85, 0.5);
+        }
+
+        @keyframes glow {
+            0% { text-shadow: rgba(255, 85, 85, 0.2), rgba(255, 255, 255, 0) }
+            50% { text-shadow: rgba(255, 85, 85, 0.2), rgba(255, 255, 255, 0) }
+            100% { text-shadow: rgba(255, 85, 85, 0.2), rgba(255, 255, 255, 0) }
+        }
+
+        /* New Section: Invisible Guardian */
+        .invisible-guardian {
+            padding: 60px;
+            background-color: #161b22;
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .invisible-guardian.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .invisible-guardian h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+            animation: glow 2s infinite alternate;
+        }
+
+        .invisible-guardian p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        /* Who Are We Section */
+        .who-are-we {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px;
+            background: #0d1117; /* Match content-section background */
+            color: white;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+            margin-bottom: 60px;
+        }
+
+        .who-are-we.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .who-are-we .text {
+            max-width: 50%;
+        }
+
+        .who-are-we .text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+            animation: glow 2s infinite alternate;
+        }
+
+        .who-are-we .text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .who-are-we .image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .who-are-we img {
+            width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 85, 85, 0.5);
+        }
+
+        .who-are-we .image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* CTA Buttons */
+        .cta-buttons a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background: #ff5555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .cta-buttons a:hover {
+            background: #ff2222;
+            transform: scale(1.1);
+        }
+
+        /* NoctisX Section */
+        .noctisx-section {
+            padding: 60px;
+            background: #161b22;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .noctisx-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .noctisx-section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+            animation: glow 2s infinite alternate;
+        }
+
+        .noctisx-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .noctisx-section .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ff5555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .noctisx-section .cta-button:hover {
+            background: #ff2222;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 60px; /* Match the padding of .who-are-we */
+        }
+
+        .footer-logo,
+        .footer-links,
+        .footer-contact {
+            text-align: center;
+        }
+
+        /* Clear floats */
+        .container::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .footer {
+            background-color: #0d1117;
+            color: white;
+            padding: 40px 0 0;
+        }
+
+        .footer-top {
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .footer-left,
+        .footer-center,
+        .footer-right {
+            width: 33.33%;
+            float: left;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .footer-brand .logo {
+            font-size: 2rem;
+            color: #ff5555;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-text {
+            margin: 8px 0;
+            color: #fff8f8;
+        }
+
+        .footer-list-title {
+            color: #ff5555;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            color: #fffcfc;
+            text-decoration: none;
+            display: block;
+            margin: 8px 0;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #ff5555;
+        }
+
+        .social-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-link {
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .copyright {
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .copyright-link {
+            color: #ff5555;
+            text-decoration: none;
+        }
+                /* Case Studies Section */
+        .case-studies {
+            padding: 60px;
+            background: #161b22;
+            color: white;
+            text-align: center;
+        }
+
+        .case-studies h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+            animation: glow 2s infinite alternate;
+        }
+
+        .case-studies-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .case-study {
+            background: #0d1117;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ff555580;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .case-study:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(255, 85, 85, 0.8);
+        }
+
+        .case-study h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .case-study button {
+            background: #ff5555;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .case-study button:hover {
+            background: #ff2222;
+            transform: scale(1.1);
+        }
+
+        .case-study-video {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .case-study-video iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #ff575780;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">NoctisX</div>
+        <div class="links">
+            <a href="#home">Home</a>
+            <a href="#hackers">Hackers</a>
+            <a href="#noctisx">NoctisX</a>
+            <a href="#case-studies">Case Studies</a>
+            <a href="#about-us">About us</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="{{ url_for('login_page') }}" class="btn" style="margin-left: 20px;">Login</a>
+    </div>
+
+    <div class="hero" id="home">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="static/Hacker.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 data-text="NoctisX">NoctisX</h1>
+            <p>Cybersecurity Foresight: Preventing tomorrow's threats, today</p>
+        </div>
+    </div>
+
+    <!-- New Invisible Guardian Section -->
+    <div class="invisible-guardian" id="hackers">
+        <h2 class="center-align" style="text-align: center;">The Shadowy Figures of the Digital Realm</h2>
+        <p>
+            The digital realm, a seemingly boundless expanse of information, hides a sinister underbelly. Lurking within its depths are shadowy figures, the hackers, masters of deception and exploitation. They weave intricate webs of deceit, employing social engineering to lure unsuspecting victims into treacherous traps. With a flick of their digital fingers, they exploit vulnerabilities, infiltrating systems like ghosts in the machine. Their methods are as varied as they are insidious: from the art of phishing, where emails masquerade as trustworthy invitations, to the insidious spread of malware, infecting devices and siphoning away precious data. And let us not forget the allure of the easily guessed password, a gaping hole in the fortress of digital security, inviting these digital predators to feast.
+        </p>
+    </div>
+
+    <!-- NoctisX Section -->
+    <div class="noctisx-section" id="noctisx">
+        <h2>What is NoctisX?</h2>
+        <p>Scroll down to uncover the secrets of NoctisX, your ultimate cybersecurity guardian.</p>
+        <a href="#content-section" class="btn">Learn More</a>
+    </div>
+
+    <div class="content-section" id="content-section">
+        <div class="text">
+            <h2>Data's sanctuary. Where security reigns supreme.</h2>
+            <p>
+                Unveil the Invisible Guardian: A covert protector safeguarding your digital world. This sophisticated system constructs an impenetrable barrier, analyzing input patterns, monitoring system changes, and detecting even the subtlest irregularities. Utilizing steganographic techniques, it embeds crucial intelligence within the digital framework, ensuring it remains beyond detection. Instead of disruptive alerts, it communicates through encrypted signals—seamlessly integrated into an interface designed for both precision and elegance.
+            </p>
+        </div>
+        <div class="video">
+            <iframe src="static/UnveiltheInvisible.mp4" allowfullscreen></iframe>
+        </div>
+    </div>
+<!-- Case Studies Section -->
+<div class="case-studies" id="case-studies">
+    <h2>Case Studies</h2>
+    <div class="case-studies-grid">
+        <!-- Case Study 1 -->
+        <div class="case-study">
+            <h3>Case Study 1</h3>
+            <button onclick="playVideo('static/BRUTE.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 2 -->
+        <div class="case-study">
+            <h3>Case Study 2</h3>
+            <button onclick="playVideo('static/SQL.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 3 -->
+        <div class="case-study">
+            <h3>Case Study 3</h3>
+            <button onclick="playVideo('static/XSS.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 4 -->
+        <div class="case-study">
+            <h3>Case Study 4</h3>
+            <button onclick="playVideo('static/PHISING.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 5 -->
+        <div class="case-study">
+            <h3>Case Study 5</h3>
+            <button onclick="playVideo('static/PACKET.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 6 -->
+        <div class="case-study">
+            <h3>Case Study 6</h3>
+            <button onclick="playVideo('static/UFA.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 7 -->
+        <div class="case-study">
+            <h3>Case Study 7</h3>
+            <button onclick="playVideo('static/Steganography.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Case Study 8 -->
+        <div class="case-study">
+            <h3>Case Study 8</h3>
+            <button onclick="playVideo('static/anomaly.mp4', this)">Play</button>
+            <div class="case-study-video">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="who-are-we" id="about-us">
+        <div class="text">
+            <h2>Who Am I?</h2>
+            <p>
+                I am passionate about cybersecurity. I developed NoctisX to address the increasing challenges of online safety. My goal is to provide users with accessible tools and educational resources to protect themselves in the digital realm. This project represents my commitment to applying my skills and knowledge to real-world problems, and I am eager to continue improving NoctisX and making a positive impact on online security.
+            </p>
+            <div>
+                <a href="#hero" class="btn">Join Now</a>
+                <a href="#hero" class="btn">Learn More</a>
+            </div>
+        </div>
+        <div class="image">
+            <img src="static/SMM.gif" alt="Team Image">
+        </div>
+    </div>
+
+    <footer class="footer" id="contact">
+        <div class="footer-top">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <div class="footer-brand">
+                        <div class="logo-container">
+                            <a href="#" class="logo">NoctisX</a>
+                        </div>
+                        <p class="footer-text">info@noctisx.com</p>
+                        <p class="footer-text">123 Main St, Anytown, USA</p>
+                        <p class="footer-text">+1234567890</p>
+                    </div>
+                </div>
+                <div class="footer-center">
+                    <div class="need-help">
+                        <p class="footer-list-title">Need Help?</p>
+                        <ul class="footer-list">
+                            <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                            <li><a href="#" class="footer-link">Refund Policy</a></li>
+                            <li><a href="#" class="footer-link">Affiliate</a></li>
+                            <li><a href="#" class="footer-link">Use Cases</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-right">
+                    <div class="follow-us">
+                        <p class="footer-list-title">Follow Us</p>
+                        <div class="footer-wrapper">
+                            <div class="social-wrapper">
+                                <ul class="social-list">
+                                    <li>
+                                        <a href="#" class="social-link" style="background-color: #3b5998">
+                                            <ion-icon name="logo-facebook"></ion-icon>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="social-link" style="background-color: #55acee">
+                                            <ion-icon name="logo-twitter"></ion-icon>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="social-link" style="background-color: #d71e18">
+                                            <ion-icon name="logo-pinterest"></ion-icon>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="social-link" style="background-color: #1565c0">
+                                            <ion-icon name="logo-linkedin"></ion-icon>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="copyright">
+                    &copy; 2024 NoctisX. All Right Reserved by <a href="#" class="copyright-link">NYX989</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    
+    <script>
+        // Scroll animations
+        const sections = document.querySelectorAll('.content-section, .invisible-guardian, .who-are-we, .noctisx-section, .case-studies');
+        const options = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, options);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Smooth scroll with offset for navbar links
+       // Updated Smooth scroll with anchor link check
+document.querySelectorAll('.navbar a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        
+        // Only handle internal anchor links
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                const offset = 80;
+                const targetPosition = targetElement.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+});
+
+        // Video Playback Functionality
+        function playVideo(videoSrc, button) {
+            const caseStudyVideo = button.nextElementSibling;
+            const iframe = caseStudyVideo.querySelector('iframe');
+
+             // If the video is already playing, stop it and hide the container
+    if (caseStudyVideo.style.display === 'block') {
+        iframe.src = ''; // Stop the video by clearing the src
+        caseStudyVideo.style.display = 'none'; // Hide the video container
+    } else {
+        // Set the src attribute of the iframe to the video source
+        iframe.src = videoSrc;
+        // Show the video container
+        caseStudyVideo.style.display = 'block';
+    }
+}
+    </script>
+</body>
+</html>

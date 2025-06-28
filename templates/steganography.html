@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography</title>
+    <link rel="icon" href="static/NoctisX1.png" type="image/png">
+    <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+
+        /* Darknet Font */
+        @font-face {
+            font-family: 'Darknet';
+            src: url('static/fonts/Darknet.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+
+        /* General Styles */
+        :root {
+            --background-color: #0d1117;
+            --text-color: white;
+            --navbar-bg: rgba(0, 0, 0, 0.8);
+            --card-bg: rgba(0, 0, 0, 0.8);
+            --card-shadow: 0 0 20px rgba(255, 85, 85, 0.5);
+            --btn-bg: #be2e2ed8;
+            --btn-hover-bg: #ff2222;
+            --highlight-color: #ff5555;
+            --gradient-primary: linear-gradient(135deg, #ff5555, #ff2222);
+        }
+
+
+        body.light-mode {
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            --btn-bg: #007BFF;
+            --btn-hover-bg: #0056b3;
+            --highlight-color: #007BFF;
+            --gradient-primary: linear-gradient(135deg, #007BFF, #0056b3);
+        }
+
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+            transition: background 0.5s, color 0.5s;
+        }
+
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* Main Container */
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
+        /* Sections */
+        .section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+
+        /* Titles */
+        h1 {
+            font-family: 'Darknet', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color);
+        }
+
+
+        /* Pulsing Neon Effect for Text Shadows */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color); }
+            50% { text-shadow: 0 0 20px var(--highlight-color), 0 0 40px var(--highlight-color); }
+            100% { text-shadow: 0 0 10px var(--highlight-color), 0 0 20px var(--highlight-color); }
+        }
+
+
+        /* Forms */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+
+        label {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--highlight-color);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+
+        input:focus, textarea:focus {
+            border-color: var(--btn-hover-bg);
+            box-shadow: 0 0 10px rgba(255, 85, 85, 0.7);
+        }
+
+
+        button {
+            background: var(--btn-bg);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+
+        button:hover {
+            background: var(--btn-hover-bg);
+            transform: scale(1.05);
+        }
+
+
+        /* Dark Mode Toggle Button */
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--btn-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+
+        .mode-toggle:hover {
+            background: var(--btn-hover-bg);
+            transform: scale(1.1);
+        }
+
+
+        /* Responsive Layout */
+        @media (max-width: 1000px) {
+            .container {
+                padding: 10px;
+            }
+
+
+            .section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+    <div class="container">
+        <!-- Image Steganography -->
+        <div class="section">
+            <h1>Image Steganography</h1>
+            <h2>Encode Message into Image</h2>
+            <form action="/encode" method="POST" enctype="multipart/form-data">
+                <label>Image File:</label>
+                <input type="file" name="file" accept="image/png" required>
+                <label>Message to Encode:</label>
+                <textarea name="message" required></textarea>
+                <label>Password:</label>
+                <input type="password" name="password" required>
+                <button type="submit">Encode Message</button>
+            </form>
+
+
+            <h2>Decode Message from Image</h2>
+            <form action="/decode" method="POST" enctype="multipart/form-data">
+                <label>Image File:</label>
+                <input type="file" name="image" required>
+                <label>Password:</label>
+                <input type="password" name="password" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+
+        <!-- Video Steganography -->
+        <div class="section">
+            <h1>Video Steganography</h1>
+            <h2>Encode Message into Video</h2>
+            <form action="/encode_video" method="POST" enctype="multipart/form-data">
+                <label>Video File:</label>
+                <input type="file" name="video" accept="video/*" required>
+                <label>Message to Encode:</label>
+                <textarea name="message" required></textarea>
+                <label>Password:</label>
+                <input type="password" name="password" required>
+                <button type="submit">Encode Message</button>
+            </form>
+
+
+            <h2>Decode Message from Video</h2>
+            <form action="/decode_video" method="POST" enctype="multipart/form-data">
+                <label>Video File:</label>
+                <input type="file" name="video" required>
+                <label>Password:</label>
+                <input type="password" name="password" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // Dark Mode Toggle Function
+        function toggleMode() {
+            const body = document.body;
+            body.classList.toggle('light-mode');
+        }
+    </script>
+</body>
+</html>

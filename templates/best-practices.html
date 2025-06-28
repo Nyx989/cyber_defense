@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Education</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="static/NoctisX1.png" type="image/png">
+  <link rel="shortcut icon" href="static/NoctisX1.png" type="image/png">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito Sans', sans-serif;
+      color: white;
+      background: linear-gradient(135deg, #0d1117, #161b22);
+      overflow-x: hidden;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Pulsing Neon Effect for Text Shadows */
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555; }
+      50% { text-shadow: 0 0 20px #ff5555, 0 0 40px #ff5555; }
+      100% { text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555; }
+    }
+
+    /* Apply Pulsing Effect to Neon Text */
+    h2 {
+      animation: pulse 2s infinite !important;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px 40px;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar .logo {
+      margin-right: auto;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff5555;
+      text-shadow: 0 0 10px #ff5555;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .navbar a:hover {
+      color: #ff5555;
+      transform: translateY(-3px);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Video Background */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the video covers the entire hero section */
+      z-index: 0; /* Places the video behind the content */
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6); /* Dark overlay for better text visibility */
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2; /* Places the content above the video and overlay */
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-size: 4.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+
+    /* Content Section */
+    .content-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px;
+      background: linear-gradient(135deg, #161b22, #0d1117);
+      color: white;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+      border-radius: 20px;
+      margin: 20px;
+      box-shadow: 0 0 20px rgba(255, 85, 85, 0.3);
+    }
+
+    .content-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
+      animation: pulse 2s infinite;
+    }
+
+    .attack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 boxes per row */
+      gap: 30px;
+      width: 100%;
+    }
+
+    .attack-item {
+      background: rgba(255, 85, 85, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 85, 85, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .attack-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(255, 85, 85, 0.5);
+    }
+
+    .attack-item i {
+      font-size: 2rem;
+      color: #ff5555;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+
+    .attack-item:hover i {
+      transform: rotate(360deg);
+    }
+
+    .attack-item strong {
+      font-size: 1.2rem;
+      color: #ff5555;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .attack-item p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .attack-item:hover p {
+      opacity: 1;
+    }
+
+    /* Interactive Description Effect */
+    .attack-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 85, 85, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .attack-item:hover::before {
+      left: 100%;
+    }
+
+    /* Inner Content Enhancements */
+    .attack-item .inner-content {
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .attack-item:hover .inner-content {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .attack-item .inner-content u {
+      color: #ff5555;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .attack-item .inner-content p {
+      margin: 10px 0;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #0d1117;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .footer .logo {
+      font-size: 1.5rem;
+      color: #ff5555;
+      text-shadow: 0 0 10px #ff5555;
+      margin-bottom: 20px;
+    }
+
+    .footer p {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    /* Advanced Animations */
+    @keyframes slideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .attack-item {
+      animation: slideIn 0.5s ease-out forwards;
+      opacity: 0;
+    }
+
+    .attack-item:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    .attack-item:nth-child(even) {
+      animation-delay: 0.4s;
+    }
+
+    .inner-content {
+      animation: fadeIn 0.5s ease-out forwards;
+      opacity: 0;
+    }
+
+    .attack-item:hover .inner-content {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .attack-grid {
+        grid-template-columns: 1fr; /* 1 box per row on smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">Security Education</div>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#attacks">Attacks & Solutions</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero" id="home">
+    <!-- Video Background -->
+    <video autoplay loop muted playsinline class="hero-video">
+      <source src="static/BEST.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Stay Secure</h1>
+      <p>Learn how to protect your data and privacy with our best practices guide.</p>
+    </div>
+  </div>
+
+  <!-- Attacks & Solutions Section -->
+  <div class="content-section" id="attacks">
+    <h2>Attacks & Solutions</h2>
+    <div class="attack-grid">
+      <!-- Brute-Force Attacks -->
+      <div class="attack-item">
+        <i class="fas fa-shield-alt"></i>
+        <strong>1. Brute-Force Attacks</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers try to guess your password by repeatedly attempting to log in.</p>
+          <p><u>Why It's Dangerous</u>: Weak passwords can be cracked easily, giving attackers access to your account.</p>
+          <p><u>Solution</u>: Block accounts after 3 failed login attempts for 5 minutes. Use strong passwords with a mix of uppercase, lowercase, numbers, and symbols.</p>
+        </div>
+      </div>
+
+      <!-- SQL Injection -->
+      <div class="attack-item">
+        <i class="fas fa-database"></i>
+        <strong>2. SQL Injection</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers inject malicious SQL queries to manipulate or steal data from databases.</p>
+          <p><u>Why It's Dangerous</u>: Sensitive data like user credentials or financial information can be exposed.</p>
+          <p><u>Solution</u>: Use parameterized queries and input validation to prevent malicious SQL code execution.</p>
+        </div>
+      </div>
+
+      <!-- Cross-Site Scripting (XSS) -->
+      <div class="attack-item">
+        <i class="fas fa-code"></i>
+        <strong>3. Cross-Site Scripting (XSS)</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers inject malicious scripts into web pages viewed by other users.</p>
+          <p><u>Why It's Dangerous</u>: Can steal session cookies, redirect users to malicious sites, or deface websites.</p>
+          <p><u>Solution</u>: Sanitize user inputs and implement Content Security Policy (CSP) to block unauthorized scripts.</p>
+        </div>
+      </div>
+
+      <!-- Phishing -->
+      <div class="attack-item">
+        <i class="fas fa-fish"></i>
+        <strong>4. Phishing</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers trick users into revealing sensitive information like passwords or credit card details.</p>
+          <p><u>Why It's Dangerous</u>: Can lead to identity theft, financial loss, or unauthorized account access.</p>
+          <p><u>Solution</u>: Educate users to verify links and enable two-factor authentication (2FA) for added security.</p>
+        </div>
+      </div>
+
+      <!-- Unauthorized File Access -->
+      <div class="attack-item">
+        <i class="fas fa-file"></i>
+        <strong>5. Unauthorized File Access</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers gain access to sensitive files or directories on a server.</p>
+          <p><u>Why It's Dangerous</u>: Confidential data can be stolen, modified, or deleted.</p>
+          <p><u>Solution</u>: Move suspicious files to quarantine and notify the admin. Use strict file permissions and access controls.</p>
+        </div>
+      </div>
+
+      <!-- Packet Sniffing -->
+      <div class="attack-item">
+        <i class="fas fa-network-wired"></i>
+        <strong>6. Packet Sniffing</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers intercept network traffic to steal sensitive data like passwords or credit card numbers.</p>
+          <p><u>Why It's Dangerous</u>: Unencrypted data can be easily captured and misused.</p>
+          <p><u>Solution</u>: Monitor TCP packets and block unauthorized traffic. Use encryption (e.g., HTTPS) to secure data in transit.</p>
+        </div>
+      </div>
+
+      <!-- Steganography Exploits -->
+      <div class="attack-item">
+        <i class="fas fa-eye"></i>
+        <strong>7. Steganography Exploits</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Attackers hide malicious data in images or videos to bypass detection.</p>
+          <p><u>Why It's Dangerous</u>: Can be used to deliver malware or exfiltrate data.</p>
+          <p><u>Solution</u>: Use strong passwords for encoding/decoding hidden messages. Verify the source of media files before decoding.</p>
+        </div>
+      </div>
+
+      <!-- Anomaly Detection -->
+      <div class="attack-item">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>8. Anomaly Detection</strong>
+        <div class="inner-content">
+          <p><u>What Happens</u>: Unusual activity indicates a potential security breach.</p>
+          <p><u>Why It's Dangerous</u>: Attackers may have already gained access to your system.</p>
+          <p><u>Solution</u>: Redirect users to a verification page and send email alerts. Use machine learning to detect anomalies in real-time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="logo">Security Education</div>
+    <p>&copy; 2023 Security Education. All rights reserved.</p>
+  </div>
+
+  <script>
+    // Add visibility transitions on scroll
+    const sections = document.querySelectorAll('.content-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
