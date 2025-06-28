@@ -1,0 +1,13 @@
+Flask
+pynput
+pyperclip
+psutil
+sounddevice
+Pillow
+scapy
+# If using ML:
+# tensorflow
+# scikit-learn
+# If using MongoDB:
+# pymongo
+# If using Dash/Grafana, their respective libraries
